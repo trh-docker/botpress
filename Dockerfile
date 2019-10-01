@@ -9,7 +9,7 @@ RUN echo '[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # Th
 
 RUN git clone https://github.com/botpress/botpress.git  &&\
     cd botpress
-RUN nvm install 10.11
+RUN bash nvm install 10.11
 RUN yarn && yarn build
 
 
