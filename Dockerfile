@@ -3,7 +3,7 @@ FROM quay.io/spivegin/golangnodejs:latest
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-ENV NVM_DIR /usr/local/nvm
+ENV NVM_DIR /root/.nvm/
 ENV NODE_VERSION 10.11
 
 WORKDIR $NVM_DIR
