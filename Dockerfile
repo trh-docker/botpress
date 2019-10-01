@@ -1,6 +1,10 @@
 FROM quay.io/spivegin/golangnodejs:latest
 WORKDIR /opt/Source
 
+RUN export NVM_DIR="$HOME/.nvm" \ 
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm \
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion 
+
 
 RUN git clone https://github.com/botpress/botpress.git  &&\
     cd botpress &&\
@@ -8,6 +12,3 @@ RUN git clone https://github.com/botpress/botpress.git  &&\
     yarn && yarn build
 
 
-# RUN export NVM_DIR="$HOME/.nvm" \ 
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm \
-#     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion 
