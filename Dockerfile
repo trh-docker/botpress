@@ -11,6 +11,7 @@ RUN source ~/.nvm/nvm.sh; \
 
 RUN git clone https://github.com/botpress/botpress.git  &&\
     cd botpress &&\ 
+    npm install --save gulp &&\
     yarn && yarn build
 
 
