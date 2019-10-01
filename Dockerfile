@@ -1,18 +1,17 @@
-FROM quay.io/spivegin/golangnodejs:latest 
+FROM quay.io/spivegin/tlmbasedebian:latest
 
-ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 10.11
+RUN apt-get update && apt-get install -y unzip curl sudo git &&\
+    apt-get autoclean && apt-get autoremove &&\
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
-# Install nvm with node and npm
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.30.1/install.sh | bash \
-    && source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
-
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-RUN node --version
+RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add &&\
+    echo 'deb https://deb.nodesource.com/node_10.x stretch main' > /etc/apt/sources.list.d/nodesource.list &&\
+    echo 'deb-src https://deb.nodesource.com/node_10.x stretch main' >> /etc/apt/sources.list.d/nodesource.list &&\
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - &&\
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list &&\
+    apt-get update && apt-get install -y nodejs yarn &&\
+    apt-get autoclean && apt-get autoremove &&\
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 RUN cd /opt/ &&\
     git clone https://github.com/botpress/botpress.git  &&\
