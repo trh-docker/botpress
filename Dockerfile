@@ -1,6 +1,6 @@
 FROM quay.io/spivegin/tlmbasedebian:latest
 
-RUN apt-get update && apt-get install -y unzip curl sudo git &&\
+RUN apt-get update && apt-get install -y unzip curl sudo git gcc gnupg2 tar git curl wget apt-transport-https ca-certificates build-essential  &&\
     apt-get autoclean && apt-get autoremove &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
