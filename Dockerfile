@@ -1,7 +1,7 @@
 FROM quay.io/spivegin/golangnodejs:latest AS builder
 
 # Replace shell with bash so we can source files
-RUN rm /bin/sh && ln -sf /bin/bash /bin/sh 
+RUN rm /bin/sh && cp /bin/bash /bin/sh
 
 FROM builder
 RUN cd /opt/ &&\
