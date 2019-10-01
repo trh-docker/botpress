@@ -1,9 +1,5 @@
-FROM quay.io/spivegin/golangnodejs:latest AS builder
+FROM quay.io/spivegin/golangnodejs:latest 
 
-# Replace shell with bash so we can source files
-RUN rm /bin/sh && cp /bin/bash /bin/sh
-
-FROM builder
 RUN cd /opt/ &&\
     git clone https://github.com/botpress/botpress.git  &&\
     cd botpress &&\ 
