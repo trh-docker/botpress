@@ -2,8 +2,8 @@ FROM quay.io/spivegin/golangnodejs:latest
 WORKDIR /opt/Source
 
 
-RUN git clone https://github.com/botpress/botpress.git  . &&\
-    cd /opt/Source/botpress/ &&\
+RUN git clone https://github.com/botpress/botpress.git  &&\
+    cd botpress &&\
     nvm install 10.11 &&\
     yarn && yarn build
 
