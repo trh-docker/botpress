@@ -1,17 +1,21 @@
 FROM quay.io/spivegin/golangnodejs:latest
-WORKDIR /root/
-USER root
+
+# Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-ENV NODE_VERSION=10.11
-# Install NODE
-RUN source ~/.nvm/nvm.sh; \
-    nvm install 10.11; \
-    nvm use --delete-prefix 10.11;
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 10.11
 
-RUN git clone https://github.com/botpress/botpress.git  &&\
+WORKDIR $NVM_DIR
+
+RUN nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN cd /opt/ &&\
+    git clone https://github.com/botpress/botpress.git  &&\
     cd botpress &&\ 
-    nvm install 10.11 &&\
     yarn && yarn build
-
-
